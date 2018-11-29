@@ -66,7 +66,7 @@
   failed_when: "result | failed and 'This content points out to the remote resources' not in result.stdout"
   register: result
   with_items: "{{ scap_profile_6 }}"
-  when: run_scap and ansible_distribution_major_version == "6"
+  when: ansible_distribution_major_version == "6"
   tags:
     - scap
 
@@ -75,16 +75,21 @@
   failed_when: "result | failed and result.rc == 1"
   register: result
   with_items: "{{ scap_profile_7 }}"
-  when: run_scap and ansible_distribution_major_version == "7"
+  when: ansible_distribution_major_version == "7"
   tags:
     - scap
 
-- name: Determine Most Recent Report
-  shell: ls -t /tmp/scap_reports/*.html | head -n 1
-  args:
-    executable: /bin/bash
-  when: run_scap
-  register: scap_html_report
+- name: determine the most recent scap report
+  command: ls -tr /tmp/scap_reports/
+  register: results
+  tags:
+    - scap
+
+- name: create the scap directory in the web server content
+  file:
+    name: /var/www/html/scap
+    state: directory
+    mode: 0755
   tags:
     - scap
 
