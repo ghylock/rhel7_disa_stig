@@ -1,0 +1,8 @@
+---
+- name: Run STIG
+  hosts: web
+  become: yes
+  roles:
+  - role: redhatofficial.rhel7_disa_stig
+...
+~                                                    
