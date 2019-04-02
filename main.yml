@@ -4,6 +4,10 @@
   become: yes
   tasks:
   - file:
+      path: /etc/sssd
+      state: directory
+      mode: 0755
+  - file:
       path: /etc/sssd/sssd.conf
       state: touch
       mode: 0644
