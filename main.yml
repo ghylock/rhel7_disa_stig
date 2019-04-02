@@ -1,4 +1,13 @@
 ---
+- name: Prep for STIG remediation
+  hosts: web
+  become: yes
+  tasks:
+  - file:
+      path: /etc/sssd/sssd.conf
+      state: touch
+      mode: 0644
+
 - name: Run STIG remediation
   hosts: web
   become: yes
