@@ -1,1 +1,1 @@
-# rhel7_disa_stig
+# rhel7_stig
