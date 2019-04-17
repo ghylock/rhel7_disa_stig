@@ -16,6 +16,6 @@
   hosts: web
   become: yes
   roles:
-  - role: redhatofficial.rhel7_disa_stig
+  - role: redhatofficial.rhel7_stig
   - role: report
 ...
